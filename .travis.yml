@@ -1,0 +1,24 @@
+# Env Options
+sudo: required
+dist: trusty
+
+# Language Options
+language: go
+
+go:
+  - 1.8.5
+  - 1.9.1
+  - 1.9.2
+  - 1.9.3
+  - 1.10beta2
+  - 1.10rc1
+  - master
+  - tip
+
+before_install:
+  - sudo apt-get update -qqy
+  - sudo apt-get install -qqy upx
+
+script:
+  - go get -t ./...
+  - make travis-sizes
