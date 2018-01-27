@@ -6,22 +6,37 @@ import (
 	"os"
 	"os/signal"
 	"time"
+	"fmt"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/justinas/alice"
 	log "github.com/sirupsen/logrus"
 )
 
+const (
+	defLvl = "info"
+	defPort = "443"
+)
+
 func init() {
 	// Calls the function in cmd.go
 	cmdExec()
 
+	// Gets the log level enviroment variable.
+	envLvl, err := log.ParseLevel(GetEnv("SLED_LOG_LVL", defLvl))
+  if err != nil {
+		fmt.Println("Invalid log level %s", GetEnv("SLED_LOG_LVL", defLvl))
+		os.Exit(3)
+  }
+
 	// Setup logging with Logrus.
 	log.SetOutput(os.Stdout)
+	log.SetLevel(envLvl)
 }
 
 func main() {
-	stopChan := make(chan os.Signal)
+	// Gets and stores port number enviroment variable.
+	envPort := GetEnv("SLED_SRV_PORT", defPort)
 
 	log.Info("Setting server router.")
 
@@ -35,22 +50,25 @@ func main() {
 	log.Info("Setting server port.")
 
 	// Set the port for a secure port, default is 443
-	portNum := ":" + GetEnv("SLED_SRV_PORT", "443")
+	envport := ":" + envPort
 
 	// Chain middleware using Alice.
 	app := alice.New(SimpleLogger).Then(router)
 
-	srv := &http.Server{Addr: portNum, Handler: app}
+	srv := &http.Server{Addr: envport, Handler: app}
 
-	log.Info("Starting server on port " + GetEnv("SLED_SRV_PORT", "443"))
+	log.Info("Starting server on port " + envPort)
 
 	go func() {
-		if err := srv.ListenAndServeTLS("cert.pem", "key.pem"); err != nil {
+		if err := srv.ListenAndServeTLS("./cert.pem", "./key.pem"); err != nil {
 			log.Error("Listen: %s\n", err)
 		}
 	}()
 
 	p := NewPID("/var/run/sled.pid")
+
+	// Sets gracefull shutdown.
+  stopChan := make(chan os.Signal)
 
 	signal.Notify(stopChan, os.Interrupt)
 
