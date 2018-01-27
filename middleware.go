@@ -7,7 +7,7 @@ import (
 
 func SimpleLogger(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("%s requested %s", r.RemoteAddr, r.URL)
+		log.Info("%s requested %s", r.RemoteAddr, r.URL)
 		h.ServeHTTP(w, r)
 	})
 }
