@@ -1,4 +1,4 @@
-# Sled [![Build Status](https://travis-ci.org/junland/sled.svg?branch=master)](https://travis-ci.org/junland/sled)
+# Sled [![Build Status](https://travis-ci.org/junland/sled.svg?branch=master)](https://travis-ci.org/junland/sled) [![Open Source Helpers](https://www.codetriage.com/junland/sled/badges/users.svg)](https://www.codetriage.com/junland/sled)
 
 A simple boiler-plate for web apps.
 
