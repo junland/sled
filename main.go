@@ -2,11 +2,11 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
-	"fmt"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/justinas/alice"
@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	defLvl = "info"
+	defLvl  = "info"
 	defPort = "443"
 )
 
@@ -24,10 +24,10 @@ func init() {
 
 	// Gets the log level enviroment variable.
 	envLvl, err := log.ParseLevel(GetEnv("SLED_LOG_LVL", defLvl))
-        if err != nil {
-	       fmt.Println("Invalid log level %s", GetEnv("SLED_LOG_LVL", defLvl))
-	       os.Exit(3)
-        }
+	if err != nil {
+		fmt.Println("Invalid log level %s", GetEnv("SLED_LOG_LVL", defLvl))
+		os.Exit(3)
+	}
 
 	// Setup logging with Logrus.
 	log.SetOutput(os.Stdout)
@@ -68,7 +68,7 @@ func main() {
 	p := NewPID("/var/run/sled.pid")
 
 	// Sets gracefull shutdown.
-  stopChan := make(chan os.Signal)
+	stopChan := make(chan os.Signal)
 
 	signal.Notify(stopChan, os.Interrupt)
 
