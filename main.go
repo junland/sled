@@ -24,10 +24,10 @@ func init() {
 
 	// Gets the log level enviroment variable.
 	envLvl, err := log.ParseLevel(GetEnv("SLED_LOG_LVL", defLvl))
-  if err != nil {
-		fmt.Println("Invalid log level %s", GetEnv("SLED_LOG_LVL", defLvl))
-		os.Exit(3)
-  }
+        if err != nil {
+	       fmt.Println("Invalid log level %s", GetEnv("SLED_LOG_LVL", defLvl))
+	       os.Exit(3)
+        }
 
 	// Setup logging with Logrus.
 	log.SetOutput(os.Stdout)
