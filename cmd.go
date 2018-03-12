@@ -6,6 +6,8 @@ import (
 	"os"
 )
 
+var BinVersion string
+
 func cmdExec() {
 	flag.Usage = func() {
 		fmt.Printf("Name:\n")
@@ -28,7 +30,7 @@ func cmdExec() {
 	switch os.Args[1] {
 	case "version":
 		fmt.Printf("Made with love.\n")
-		fmt.Printf("Version: v?.?.?\n")
+		fmt.Printf("Version: v%s\n", BinVersion)
 		fmt.Printf("License: MIT\n")
 		os.Exit(0)
 	}
