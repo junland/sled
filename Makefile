@@ -31,8 +31,6 @@ travis-sizes:
 	@cp ./sled-stripped ./sled-compressed
 	@upx -9 -q ./sled-compressed > /dev/null || (echo "Failed to compress stripped binary: $$?"; exit 1)
 	@echo "Size of compressed stripped binary: $$(ls -l sled-compressed | awk '{print $$5}') bytes or $$(ls -lh sled-compressed | awk '{print $$5}')" >> ./size-report.txt
-	@echo "Cleaning..."
-	@rm -f ./sled-*
 	@echo "Reported binary sizes for Go version $$(echo -n $$(go version) | grep -o '1\.[0-9|\.]*'): "
 	@cat ./size-report.txt
 	@rm -f ./*.txt
