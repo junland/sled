@@ -29,7 +29,7 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
-      go: 1.9.4
+      go: 1.9.3
       tags: true
       repo: junland/sled
   - provider: releases
@@ -39,6 +39,6 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
-      go: "1.10"
+      go: 1.9.4
       tags: true
       repo: junland/sled
