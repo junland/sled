@@ -30,6 +30,10 @@ deploy:
   on:
     branch: master
     go: 1.9.4
+    tags: true
+    repo: junland/sled
+  on:
+    branch: master
     go: "1.10"
     tags: true
     repo: junland/sled
