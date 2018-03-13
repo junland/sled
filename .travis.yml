@@ -35,7 +35,7 @@ deploy:
   - provider: releases
     api_key:
         secure: ELCcFCEx0da+CJZ0ksEmqCVZoBzAtN0HL98TFwWDnebvWEy3Pj8ep4E2nGYQJloQwfjhR8FHI4QPmeMKe8thrOyBLBmvGG40dN0BtfNN9LtOGfwXDXc8Ehw48TeWw7rzTcLdREQzN3e4aUTAHC2VlxZkYMG69zY34l0qxkrgLk3aeLsBu+Pd8IC1CuQbJWXG6WdFp6tPbYGW0SM+fN7aqyUP+uzwF7dAHJnmVkTbhd/YLPnj9CKuCENB4v1JSznnNB0J9yXLNugMwKWQe1JxZiifOlcvMOvK7Qmdg28Gq65pDT2YLH6Ql/Z6qDBo4jTQ5B+wqKt71sCjElPRmXMHN8CR+ODUiMAt4HcF0I+q6xY13w11u4e5zyJ8PxL9Q4KNv9Hew0E8WCa6l00tCFhLxuxncaEXmsZW0qb5uzylLa6tT4UPR3xTIL9j222Ye6z98jHh7t+JkhDANjXvP10cWJe/xIcCyPLNUCcLlTJThNfjPrhqm9RG3ZwXBtYvL5XaqGPZifoXCvQiTwTRCW/1Iag3Kw3eSji7hXMraKbyg5zWpBp7g/PNj3OdOHB5GWifPNrzicaFiyk4FKqZeSksE1O6tQDJbPIJw0QuwBJlWgaEYjZgSVW8ENGzJagP6XIZSbm7g8tJ+CkY9mzTfA2WCkChqQahl0gWdXUblcEwwT8=
-    file: sled-compressed
+    file: sled-stripped
     skip_cleanup: true
     on:
       branch: master
