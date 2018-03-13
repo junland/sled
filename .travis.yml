@@ -39,6 +39,6 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
-      go: 1.10
+      go: "1.10"
       tags: true
       repo: junland/sled
