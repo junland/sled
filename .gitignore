@@ -17,3 +17,6 @@
 *.key
 *.pem
 *.crt
+
+# Exclude binary
+./sled

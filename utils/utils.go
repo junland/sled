@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"fmt"
@@ -17,7 +17,7 @@ type Pidfile struct {
 func NewPID(name string) *Pidfile {
 	file, err := os.OpenFile(name, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
-		log.Error("pidfile: failed to open pid %s (%s)", name, err)
+		log.Error("pidfile: failed to open pid ", err)
 		os.Exit(2)
 	}
 	defer file.Close()
@@ -32,7 +32,7 @@ func NewPID(name string) *Pidfile {
 func (pf *Pidfile) RemovePID() {
 	err := os.Remove(pf.Name)
 	if err != nil {
-		log.Error("pidfile: failed to remove %s (%s)", pf.Name, err)
+		log.Error("pidfile: failed to remove ", err)
 	}
 }
 
@@ -51,7 +51,7 @@ func ReadPID(fileName string) (int, error) {
 	return pid, nil
 }
 
-// Looksup current enviroment variable with a default variable if given ENV is not found.
+// Get's a specified enviroment variable. Will default if value is not present.
 func GetEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value

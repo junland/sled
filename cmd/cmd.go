@@ -1,20 +1,20 @@
-package main
+package cmd
 
 import (
 	"flag"
 	"fmt"
 	"os"
+
+	"github.com/junland/sled/server"
 )
 
 var BinVersion string
 
-func cmdExec() {
+func Run() {
 	flag.Usage = func() {
-		fmt.Printf("Name:\n")
-		fmt.Printf("    Template for a web app cmd.\n")
 		fmt.Printf("Usage of sled:\n")
-		fmt.Printf("    sled <opts> <flags>\n")
 		fmt.Printf("Commands:\n")
+		fmt.Printf("    start     Starts the server.\n")
 		fmt.Printf("    version   Shows the version information.\n")
 		fmt.Printf("\n")
 		fmt.Printf("Options:\n")
@@ -24,15 +24,21 @@ func cmdExec() {
 	flag.Parse()
 
 	if len(os.Args) < 2 {
-		return
+		flag.Usage()
+		os.Exit(1)
 	}
 
 	switch os.Args[1] {
+	case "start":
+		server.Start()
 	case "version":
 		fmt.Printf("Made with love.\n")
-		fmt.Printf("Version: v%s\n", BinVersion)
+		fmt.Printf("Version: %s\n", BinVersion)
 		fmt.Printf("License: MIT\n")
 		os.Exit(0)
+	default:
+		fmt.Printf("%v is not a valid command.\n", os.Args[1])
+		os.Exit(3)
 	}
 
 	if flag.NArg() == 0 {

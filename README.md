@@ -10,7 +10,7 @@ A simple boiler-plate for web apps.
 
 * Tries to adhere to the 12 factor application paradigm.
 
-* Secure from the start. HTTPS on default. (Make sure to generate your key and cert.)
+* TLS Enabled. (Make sure to generate your key and cert.)
 
 ## Get started
 
@@ -20,41 +20,39 @@ _Works best if you use `MacOS` or `Linux` for development._
 
     `go get github.com/junland/sled`
 
-2. Generate test certs.
-
-    `make test-tls`
-
-3. Build it!
+2. Build it!
 
     `go build`
 
-4. Run it!
+3. Run it!
 
     `sudo ./sled`
 
-5. Test it!
+4. Test it!
 
-    `https://localhost:443/hello` (Acknowledge the security warning)
+    `http://localhost:8080/hello` (Acknowledge the security warning)
 
-    `https://localhost:443/hello/Bob` (Acknowledge the security warning)
+    `http://localhost:8080/hello/Bob` (Acknowledge the security warning)
 
-6. Hack it! Use it! Profit!
+5. Hack it! Use it! Profit!
 
 ## Contents
 
-`cmd.go` - Command / flag file for interacting with the server binary.
+`sled.go` - Entry file.
 
-`main.go` - Main file where everything comes together.
+`cmd/cmd.go` - Command / flag file for interacting with the server binary.
 
-`routes.go` - File for putting business logic for your endpoints.
+`server/server.go` - Main logic for parsing environment variables and starting of web server.
 
-`utils.go` - Generic file for putting custom utilities for your app. (Comes with functions to interacting with PID files and enviroment variables.)
+`server/routes.go` - File for putting business logic for your endpoints.
 
-`middleware.go` - File for placing middleware functions.
+`server/middleware.go` - File for placing middleware functions.
+
+`utils/utils.go` - Generic file for putting custom utilities for your app. (Comes with functions to interacting with PID files and enviroment variables.)
 
 ## 3rd Party Libraries Used
 
-`github.com/justinas/alice` - Simple middleware chaning library.
+`github.com/justinas/alice` - Simple middleware chaining library.
 
 `github.com/sirupsen/logrus` -  Structured, pluggable logging for Go.
 
