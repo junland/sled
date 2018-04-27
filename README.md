@@ -12,7 +12,7 @@ A simple boiler-plate for web apps.
 
 * TLS Enabled. (Make sure to generate your key and cert.)
 
-## Get started
+## Getting started
 
 _Works best if you use `MacOS` or `Linux` for development._
 
@@ -36,27 +36,27 @@ _Works best if you use `MacOS` or `Linux` for development._
 
 5. Hack it! Use it! Profit!
 
-## Contents
+## Documentation
 
-`sled.go` - Entry file.
+If you would like to know more about this software, you can visit the repository documentation which is located [here][docs].
 
-`cmd/cmd.go` - Command / flag file for interacting with the server binary.
-
-`server/server.go` - Main logic for parsing environment variables and starting of web server.
-
-`server/routes.go` - File for putting business logic for your endpoints.
-
-`server/middleware.go` - File for placing middleware functions.
-
-`utils/utils.go` - Generic file for putting custom utilities for your app. (Comes with functions to interacting with PID files and enviroment variables.)
-
-## 3rd Party Libraries Used
+## Built With
 
 `github.com/justinas/alice` - Simple middleware chaining library.
 
 `github.com/sirupsen/logrus` -  Structured, pluggable logging for Go.
 
 `github.com/julienschmidt/httprouter` - A high performance HTTP request router that scales well.
+
+## Versioning
+
+I use [SemVer 2.0.0](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/junland/pak-mule/tags).
+
+## Authors
+
+* **John Unland** - *Initial work* - [junland](https://github.com/junland)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project
 
 ## License
 
@@ -67,3 +67,5 @@ _Please let me know through the issues tracker if you have any questions._
 ## TODO / Notes
 
 * None here for now.
+
+[docs]: docs

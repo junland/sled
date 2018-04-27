@@ -1,7 +1,10 @@
 PWD := $(shell pwd)
 GOPATH := $(shell go env GOPATH)
 PKG_NAME := "sled"
+GIT_COMMIT:=$(shell git rev-parse --verify HEAD --short=7)
+VERSION?=0.0.0
 
+.PHONY: clean
 clean:
 	@echo "Cleaning..."
 	@rm -f ./sled
@@ -12,9 +15,14 @@ clean:
 	@rm -rf ./*.pem
 	@echo "Done cleaning..."
 
+.PHONY: fmt
 fmt:
 	@echo "Running $@"
 	@go fmt *.go
+
+binary: clean
+	@echo "Building binary for commit $(GIT_COMMIT)"
+	go build -ldflags="-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -s -w" -o $(BIN_NAME)
 
 tls-certs:
 	@echo "Making Development TLS Certificates..."
