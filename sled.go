@@ -1,9 +1,14 @@
+// Package main is a simple wrapper of the real sled entrypoint package.
+//
+// This package should NOT be extended or modified in any way; to modify the
+// sled binary, work in the `github.com/junland/sled/cmd` package.
+//
 package main
 
 import (
-	"github.com/junland/sled/cmd"
+	sled "github.com/junland/sled/cmd"
 )
 
 func main() {
-	cmd.Run()
+	sled.Run()
 }

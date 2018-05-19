@@ -2,7 +2,9 @@ PWD := $(shell pwd)
 GOPATH := $(shell go env GOPATH)
 PKG_NAME := "sled"
 GIT_COMMIT:=$(shell git rev-parse --verify HEAD --short=7)
+GO_VERSION:=$(shell go version | grep -o "go1\.[0-9|\.]*")
 VERSION?=0.0.0
+BIN_NAME=sled
 
 .PHONY: clean
 clean:
@@ -18,11 +20,14 @@ clean:
 .PHONY: fmt
 fmt:
 	@echo "Running $@"
-	@go fmt *.go
+	go fmt *.go
+	go fmt ./cmd/*.go
+	go fmt ./server/*.go
+	go fmt ./utils/*.go
 
 binary: clean
 	@echo "Building binary for commit $(GIT_COMMIT)"
-	go build -ldflags="-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -s -w" -o $(BIN_NAME)
+	go build -ldflags="-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
 
 tls-certs:
 	@echo "Making Development TLS Certificates..."
@@ -42,3 +47,15 @@ travis-sizes:
 	@echo "Reported binary sizes for Go version $$(echo -n $$(go version) | grep -o '1\.[0-9|\.]*'): "
 	@cat ./size-report.txt
 	@rm -f ./*.txt
+
+amd64-binary:
+	rm -f $(BIN_NAME)
+	GOARCH=amd64 go build -ldflags "-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
+
+aarch64-binary:
+	rm -f $(BIN_NAME)
+	GOARCH=arm64 go build -ldflags "-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
+
+armhf-binary:
+	rm -f $(BIN_NAME)
+	GOARCH=arm GOARM=7 go build -ldflags "-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
