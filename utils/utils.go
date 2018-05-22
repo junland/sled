@@ -36,7 +36,7 @@ func (pf *Pidfile) RemovePID() {
 	}
 }
 
-// Reads the PID file, returns the contents of the PID file.
+// ReadPID defines a PID file with a specified filename.
 func ReadPID(fileName string) (int, error) {
 	var pid int
 	p, err := ioutil.ReadFile(fileName)
@@ -51,10 +51,24 @@ func ReadPID(fileName string) (int, error) {
 	return pid, nil
 }
 
-// Get's a specified enviroment variable. Will default if value is not present.
-func GetEnv(key, fallback string) string {
+// GetEnvString defines a enviroment variable with a specified name, fallback vaule.
+// The return is a string value.
+func GetEnvString(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value
 	}
 	return fallback
+}
+
+// GetEnvBool defines a enviroment variable with a specified name, fallback vaule.
+// The return is either a true or false.
+func GetEnvBool(key string, fallback bool) bool {
+	switch os.Getenv(key) {
+	case "true":
+		return true
+	case "false":
+		return false
+	default:
+		return fallback
+	}
 }

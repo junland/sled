@@ -14,38 +14,24 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-const (
-	defLvl  = "info"
-	defPort = "8080"
-	defPID  = "/var/run/sled.pid"
-	defTLS  = "false"
-)
-
 // Sets up and starts the main server application
-func Start() {
+func Start(logLvl string, srvPort string, srvPID string, srvTLS bool, srvCert string, srvKey string) {
 	// Get log level enviroment variable.
-	envLvl, err := log.ParseLevel(utils.GetEnv("SLED_LOG_LVL", defLvl))
+	envLvl, err := log.ParseLevel(logLvl)
 	if err != nil {
-		fmt.Println("Invalid log level ", utils.GetEnv("SLED_LOG_LVL", defLvl))
+		fmt.Println("Invalid log level ", logLvl)
 	} else {
 		// Setup logging with Logrus.
 		log.SetLevel(envLvl)
 	}
 
-	envCert := utils.GetEnv("SLED_CERT", "")
-	envKey := utils.GetEnv("SLED_KEY", "")
-	envTLS := utils.GetEnv("SLED_TLS", defTLS)
-
-	if envTLS == "true" {
-		if envCert == "" || envKey == "" {
+	if srvTLS == true {
+		if srvCert == "" || srvKey == "" {
 			log.Fatal("Invalid TLS configuration, please pass a file path for both SLED_KEY and SLED_CERT")
 		}
 	}
 
 	log.Info("Setting up server...")
-
-	envPort := utils.GetEnv("SLED_SRV_PORT", defPort)
-	envPID := utils.GetEnv("SLED_PID_FILE", defPID)
 
 	log.Debug("Setting route info...")
 
@@ -59,13 +45,13 @@ func Start() {
 	// Chain middleware using Alice.
 	chain := alice.New(SimpleLogger).Then(router)
 
-	srv := &http.Server{Addr: ":" + envPort, Handler: chain}
+	srv := &http.Server{Addr: ":" + srvPort, Handler: chain}
 
-	log.Debug("Starting server on port ", envPort)
+	log.Debug("Starting server on port ", srvPort)
 
 	go func() {
-		if defTLS == "true" {
-			err := srv.ListenAndServeTLS(envCert, envKey)
+		if srvTLS == true {
+			err := srv.ListenAndServeTLS(srvCert, srvKey)
 			if err != nil {
 				log.Fatal("ListenAndServeTLS: ", err)
 			}
@@ -76,9 +62,9 @@ func Start() {
 		}
 	}()
 
-	log.Info("Serving on port " + envPort + ", press CTRL + C to shutdown.")
+	log.Info("Serving on port " + srvPort + ", press CTRL + C to shutdown.")
 
-	p := utils.NewPID(envPID)
+	p := utils.NewPID(srvPID)
 
 	stopChan := make(chan os.Signal)
 
