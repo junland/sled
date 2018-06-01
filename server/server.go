@@ -14,19 +14,28 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+type Config struct {
+	LogLvl string
+	Port   string
+	PID    string
+	TLS    bool
+	Cert   string
+	Key    string
+}
+
 // Sets up and starts the main server application
-func Start(logLvl string, srvPort string, srvPID string, srvTLS bool, srvCert string, srvKey string) {
+func Start(c Config) {
 	// Get log level enviroment variable.
-	envLvl, err := log.ParseLevel(logLvl)
+	envLvl, err := log.ParseLevel(c.LogLvl)
 	if err != nil {
-		fmt.Println("Invalid log level ", logLvl)
+		fmt.Println("Invalid log level ", envLvl)
 	} else {
 		// Setup logging with Logrus.
 		log.SetLevel(envLvl)
 	}
 
-	if srvTLS == true {
-		if srvCert == "" || srvKey == "" {
+	if c.TLS == true {
+		if c.Cert == "" || c.Key == "" {
 			log.Fatal("Invalid TLS configuration, please pass a file path for both SLED_KEY and SLED_CERT")
 		}
 	}
@@ -45,13 +54,13 @@ func Start(logLvl string, srvPort string, srvPID string, srvTLS bool, srvCert st
 	// Chain middleware using Alice.
 	chain := alice.New(SimpleLogger).Then(router)
 
-	srv := &http.Server{Addr: ":" + srvPort, Handler: chain}
+	srv := &http.Server{Addr: ":" + c.Port, Handler: chain}
 
-	log.Debug("Starting server on port ", srvPort)
+	log.Debug("Starting server on port ", c.Port)
 
 	go func() {
-		if srvTLS == true {
-			err := srv.ListenAndServeTLS(srvCert, srvKey)
+		if c.TLS == true {
+			err := srv.ListenAndServeTLS(c.Cert, c.Key)
 			if err != nil {
 				log.Fatal("ListenAndServeTLS: ", err)
 			}
@@ -62,9 +71,9 @@ func Start(logLvl string, srvPort string, srvPID string, srvTLS bool, srvCert st
 		}
 	}()
 
-	log.Info("Serving on port " + srvPort + ", press CTRL + C to shutdown.")
+	log.Info("Serving on port " + c.Port + ", press CTRL + C to shutdown.")
 
-	p := utils.NewPID(srvPID)
+	p := utils.NewPID(c.PID)
 
 	stopChan := make(chan os.Signal)
 
