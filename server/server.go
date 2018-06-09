@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/junland/sled/utils"
+	"gitlab.com/junland/sled/utils"
 	"github.com/justinas/alice"
 	log "github.com/sirupsen/logrus"
 )

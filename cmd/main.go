@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/junland/sled/server"
-	"github.com/junland/sled/utils"
+	"gitlab.com/junland/sled/server"
+	"gitlab.com/junland/sled/utils"
 	flag "github.com/spf13/pflag"
 )
 
@@ -22,6 +22,7 @@ const (
 	defKey  = ""
 )
 
+// Configuration falgs and enviroment variables.
 var (
 	confLogLvl = flag.String("log-level", utils.GetEnvString("SLED_SERVER_PORT", defLvl), "Specify log level for output")
 	confPort   = flag.String("port", utils.GetEnvString("SLED_SERVER_PORT", defPort), "Starting server port")

@@ -6,7 +6,7 @@
 package main
 
 import (
-	sled "github.com/junland/sled/cmd"
+	sled "gitlab.com/junland/sled/cmd"
 )
 
 func main() {
