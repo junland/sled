@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
+	flag "github.com/spf13/pflag"
 	"gitlab.com/junland/sled/server"
 	"gitlab.com/junland/sled/utils"
-	flag "github.com/spf13/pflag"
 )
 
 var BinVersion string

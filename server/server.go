@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"github.com/julienschmidt/httprouter"
-	"gitlab.com/junland/sled/utils"
 	"github.com/justinas/alice"
 	log "github.com/sirupsen/logrus"
+	"gitlab.com/junland/sled/utils"
 )
 
 type Config struct {
