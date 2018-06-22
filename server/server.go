@@ -8,12 +8,11 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/julienschmidt/httprouter"
-	"github.com/justinas/alice"
 	log "github.com/sirupsen/logrus"
 	"gitlab.com/junland/sled/utils"
 )
 
+// Config struct provides configuration fields for the server.
 type Config struct {
 	LogLvl string
 	Port   string
@@ -23,7 +22,7 @@ type Config struct {
 	Key    string
 }
 
-// Sets up and starts the main server application
+// Start sets up and starts the main server application
 func Start(c Config) {
 	// Get log level enviroment variable.
 	envLvl, err := log.ParseLevel(c.LogLvl)
@@ -42,19 +41,9 @@ func Start(c Config) {
 
 	log.Info("Setting up server...")
 
-	log.Debug("Setting route info...")
+	router := RegisterRoutes()
 
-	// Set the router.
-	router := httprouter.New()
-
-	// Set the routes for the application.
-	router.GET("/hello", helloGlobalHandle)
-	router.GET("/hello/:name", helloNameHandle)
-
-	// Chain middleware using Alice.
-	chain := alice.New(SimpleLogger).Then(router)
-
-	srv := &http.Server{Addr: ":" + c.Port, Handler: chain}
+	srv := &http.Server{Addr: ":" + c.Port, Handler: router}
 
 	log.Debug("Starting server on port ", c.Port)
 
@@ -85,7 +74,9 @@ func Start(c Config) {
 
 	defer p.RemovePID()
 
-	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second) // shut down gracefully, but wait no longer than 5 seconds before halting
+	ctx, cancel := context.WithTimeout(context.Background(), 45*time.Second) // shut down gracefully, but wait no longer than 45 seconds before halting
+
+	defer cancel()
 
 	srv.Shutdown(ctx)
 }

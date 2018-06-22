@@ -7,10 +7,14 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func helloGlobalHandle(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+// helloGlobalHandle is a example handler.
+func helloGlobalHandle(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Everyone!\n")
 }
 
-func helloNameHandle(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	fmt.Fprintf(w, "Hello, %s!\n", ps.ByName("name"))
+// helloNameHandle is a example paramter handler.
+func helloNameHandle(w http.ResponseWriter, r *http.Request) {
+	ps := httprouter.ParamsFromContext(r.Context())
+	name := ps.ByName("name")
+	fmt.Fprintf(w, "Hello, %s\n", name)
 }

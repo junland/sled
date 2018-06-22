@@ -9,11 +9,12 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// Pidfile is a struct that describes a PID file.
 type Pidfile struct {
 	Name string
 }
 
-// Creates a new PID file.
+// NewPID creates a new PID file.
 func NewPID(name string) *Pidfile {
 	file, err := os.OpenFile(name, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
@@ -28,7 +29,7 @@ func NewPID(name string) *Pidfile {
 	return &Pidfile{name}
 }
 
-// Removes the PID file.
+// RemovePID removes the PID file.
 func (pf *Pidfile) RemovePID() {
 	err := os.Remove(pf.Name)
 	if err != nil {

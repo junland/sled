@@ -6,6 +6,10 @@ GO_VERSION:=$(shell go version | grep -o "go1\.[0-9|\.]*")
 VERSION?=0.0.0
 BIN_NAME=sled
 
+.PHONY: list
+list:
+	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$' | xargs
+
 .PHONY: clean
 clean:
 	@echo "Cleaning..."
@@ -25,14 +29,17 @@ fmt:
 	go fmt ./server/*.go
 	go fmt ./utils/*.go
 
+.PHONY: clean
 binary: clean
 	@echo "Building binary for commit $(GIT_COMMIT)"
 	go build -ldflags="-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
 
+.PHONY: tls-certs
 tls-certs:
 	@echo "Making Development TLS Certificates..."
 	@openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem -subj "/C=US/ST=Texas/L=Austin/O=Local Development/OU=IT Department/CN=127.0.0.0"
 
+.PHONY: travis-sizes
 travis-sizes:
 	@echo "Building unstripped binary..."
 	@go build -o sled-raw || (echo "Failed to build binary: $$?"; exit 1)
@@ -48,14 +55,17 @@ travis-sizes:
 	@cat ./size-report.txt
 	@rm -f ./*.txt
 
+.PHONY: amd64-binary
 amd64-binary:
 	rm -f $(BIN_NAME)
 	GOARCH=amd64 go build -ldflags "-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
 
+.PHONY: aarch64-binary
 aarch64-binary:
 	rm -f $(BIN_NAME)
 	GOARCH=arm64 go build -ldflags "-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
 
+.PHONY: armhf-binary
 armhf-binary:
 	rm -f $(BIN_NAME)
 	GOARCH=arm GOARM=7 go build -ldflags "-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
