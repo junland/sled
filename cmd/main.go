@@ -14,7 +14,7 @@ var BinVersion string
 // GoVersion Describes Go version that was used to build the binary.
 var GoVersion string
 
-// Default parameters when program starts without flags or enviroment variables.
+// Default parameters when program starts without flags or environment variables.
 const (
 	defLvl  = "info"
 	defPort = "8080"
@@ -29,7 +29,7 @@ var (
 	confTLS, version, help                           bool
 )
 
-// Configuration falgs and enviroment variables.
+// Configuration flag and environment variables.
 func init() {
 	flags := flag.CommandLine
 	flags.StringVar(&confLogLvl, "log-level", utils.GetEnvString("SLED_LOG_LEVEL", defLvl), "Specify log level for output")

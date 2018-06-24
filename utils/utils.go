@@ -52,7 +52,7 @@ func ReadPID(fileName string) (int, error) {
 	return pid, nil
 }
 
-// GetEnvString defines a enviroment variable with a specified name, fallback vaule.
+// GetEnvString defines a environment variable with a specified name, fallback value.
 // The return is a string value.
 func GetEnvString(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
@@ -61,7 +61,7 @@ func GetEnvString(key, fallback string) string {
 	return fallback
 }
 
-// GetEnvBool defines a enviroment variable with a specified name, fallback vaule.
+// GetEnvBool defines a environment variable with a specified name, fallback value.
 // The return is either a true or false.
 func GetEnvBool(key string, fallback bool) bool {
 	switch os.Getenv(key) {

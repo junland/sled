@@ -12,7 +12,7 @@ func helloGlobalHandle(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello Everyone!\n")
 }
 
-// helloNameHandle is a example paramter handler.
+// helloNameHandle is a example parameter handler.
 func helloNameHandle(w http.ResponseWriter, r *http.Request) {
 	ps := httprouter.ParamsFromContext(r.Context())
 	name := ps.ByName("name")

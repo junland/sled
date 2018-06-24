@@ -24,7 +24,7 @@ type Config struct {
 
 // Start sets up and starts the main server application
 func Start(c Config) {
-	// Get log level enviroment variable.
+	// Get log level environment variable.
 	envLvl, err := log.ParseLevel(c.LogLvl)
 	if err != nil {
 		fmt.Println("Invalid log level ", envLvl)
