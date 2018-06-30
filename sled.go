@@ -1,3 +1,5 @@
+// +build !windows
+
 // Package main is a simple wrapper of the real sled entrypoint package.
 //
 // This package should NOT be extended or modified in any way; to modify the
