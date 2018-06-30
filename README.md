@@ -14,11 +14,11 @@ A simple boiler-plate for web apps.
 
 ## Getting started
 
-_Works best if you use `MacOS` or `Linux` for development._
+_Binary only builds on non-Windows systems, it's best if you use `MacOS` or `Linux` for development._
 
 1. Pull down the boiler plate repo. (With your Go environment already configured.)
 
-    `go get github.com/junland/sled`
+    `go get gitlab.com/junland/sled`
 
 2. Build it!
 
@@ -45,6 +45,8 @@ If you would like to know more about this software, you can visit the repository
 `github.com/justinas/alice` - Simple middleware chaining library.
 
 `github.com/sirupsen/logrus` -  Structured, pluggable logging for Go.
+
+`github.com/spf13/pflag` - Drop in replacement for the `flag` package. 
 
 `github.com/julienschmidt/httprouter` - A high performance HTTP request router that scales well.
 
