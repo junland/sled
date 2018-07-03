@@ -9,7 +9,6 @@ import (
 	"time"
 
 	log "github.com/sirupsen/logrus"
-	"gitlab.com/junland/sled/utils"
 )
 
 // Config struct provides configuration fields for the server.
@@ -22,8 +21,10 @@ type Config struct {
 	Key    string
 }
 
+var done = make(chan os.Signal)
+
 // Start sets up and starts the main server application
-func Start(c Config) {
+func Start(c Config) error {
 	// Get log level environment variable.
 	envLvl, err := log.ParseLevel(c.LogLvl)
 	if err != nil {
@@ -62,21 +63,36 @@ func Start(c Config) {
 
 	log.Info("Serving on port " + c.Port + ", press CTRL + C to shutdown.")
 
-	p := utils.NewPID(c.PID)
+	p := NewPID(c.PID)
 
-	stopChan := make(chan os.Signal)
+	signal.Notify(done, os.Interrupt)
 
-	signal.Notify(stopChan, os.Interrupt)
+	log.Warn("After notify...")
 
-	<-stopChan // wait for SIGINT
+	<-done // wait for SIGINT
 
 	log.Warn("Shutting down server...")
 
-	defer p.RemovePID()
+	p.RemovePID()
+
+	log.Debug("Shutting down server...gracefully")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 45*time.Second) // shut down gracefully, but wait no longer than 45 seconds before halting
 
+	log.Debug("Shutting down server...gracefully...even more...")
+
 	defer cancel()
 
+	log.Debug("Shutting down server...gracefully...even more...For sure...")
+
 	srv.Shutdown(ctx)
+
+	log.Debug("JK...this is actually the end of this function..")
+
+	return nil
 }
+
+//func Stop() {
+//	log.Warn("Stopping server")
+//  done <- os.Interrupt
+//}
