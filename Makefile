@@ -29,6 +29,11 @@ fmt:
 	go fmt ./server/*.go
 	go fmt ./utils/*.go
 
+.PHONY: test
+test:
+	@echo "Running tests..."
+	go test ./...
+
 .PHONY: clean
 binary: clean
 	@echo "Building binary for commit $(GIT_COMMIT)"
