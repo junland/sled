@@ -5,7 +5,6 @@ import (
 
 	flag "github.com/spf13/pflag"
 	"gitlab.com/junland/sled/server"
-	"gitlab.com/junland/sled/utils"
 )
 
 // BinVersion describes built binary version.
@@ -32,12 +31,12 @@ var (
 // Configuration flag and environment variables.
 func init() {
 	flags := flag.CommandLine
-	flags.StringVar(&confLogLvl, "log-level", utils.GetEnvString("SLED_LOG_LEVEL", defLvl), "Specify log level for output")
-	flags.StringVar(&confPort, "port", utils.GetEnvString("SLED_SERVER_PORT", defPort), "Starting server port")
-	flags.StringVar(&confPID, "pid-file", utils.GetEnvString("SLED_SERVER_PID", defPID), "Specify server PID file path")
-	flags.BoolVar(&confTLS, "tls", utils.GetEnvBool("SLED_TLS", false), "Specify weather to run server in secure mode")
-	flags.StringVar(&confCert, "tls-cert", utils.GetEnvString("SLED_TLS_CERT", defCert), "Specify TLS certificate file path")
-	flags.StringVar(&confKey, "tls-key", utils.GetEnvString("SLED_TLS_KEY", defKey), "Specify TLS key file path")
+	flags.StringVar(&confLogLvl, "log-level", GetEnvString("SLED_LOG_LEVEL", defLvl), "Specify log level for output")
+	flags.StringVar(&confPort, "port", GetEnvString("SLED_SERVER_PORT", defPort), "Starting server port")
+	flags.StringVar(&confPID, "pid-file", GetEnvString("SLED_SERVER_PID", defPID), "Specify server PID file path")
+	flags.BoolVar(&confTLS, "tls", GetEnvBool("SLED_TLS", false), "Specify weather to run server in secure mode")
+	flags.StringVar(&confCert, "tls-cert", GetEnvString("SLED_TLS_CERT", defCert), "Specify TLS certificate file path")
+	flags.StringVar(&confKey, "tls-key", GetEnvString("SLED_TLS_KEY", defKey), "Specify TLS key file path")
 	flags.BoolVarP(&help, "help", "h", false, "Show this help")
 	flags.BoolVar(&version, "version", false, "Display version information")
 	flags.SortFlags = false
