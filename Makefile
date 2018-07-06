@@ -24,10 +24,7 @@ clean:
 .PHONY: fmt
 fmt:
 	@echo "Running $@"
-	go fmt *.go
-	go fmt ./cmd/*.go
-	go fmt ./server/*.go
-	go fmt ./utils/*.go
+	go fmt ./...
 
 .PHONY: test
 test:
