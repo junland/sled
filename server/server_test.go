@@ -10,7 +10,7 @@ func TestServerShutdown(t *testing.T) {
 	config := Config{
 		LogLvl: "DEBUG",
 		Port:   "0",
-		PID:    "./test.pid",
+		PID:    "./test-server.pid",
 		TLS:    false,
 		Cert:   "",
 		Key:    "",
