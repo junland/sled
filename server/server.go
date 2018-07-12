@@ -44,7 +44,11 @@ func Start(c Config) error {
 
 	router := RegisterRoutes()
 
-	srv := &http.Server{Addr: ":" + c.Port, Handler: router}
+	log.Debug("Setting up logging...")
+
+	value := "This better work."
+
+	srv := &http.Server{Addr: ":" + c.Port, Handler: AccessLogger(router, value)}
 
 	log.Debug("Starting server on port ", c.Port)
 
