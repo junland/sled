@@ -46,7 +46,7 @@ func Start(c Config) error {
 
 	log.Debug("Setting up logging...")
 
-	value := "This better work."
+	value := true
 
 	srv := &http.Server{Addr: ":" + c.Port, Handler: AccessLogger(router, value)}
 
