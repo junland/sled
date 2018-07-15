@@ -14,6 +14,7 @@ import (
 // Config struct provides configuration fields for the server.
 type Config struct {
 	LogLvl string
+	Access bool
 	Port   string
 	PID    string
 	TLS    bool
@@ -46,9 +47,7 @@ func Start(c Config) error {
 
 	log.Debug("Setting up logging...")
 
-	value := "This better work."
-
-	srv := &http.Server{Addr: ":" + c.Port, Handler: AccessLogger(router, value)}
+	srv := &http.Server{Addr: ":" + c.Port, Handler: AccessLogger(router, c.Access)}
 
 	log.Debug("Starting server on port ", c.Port)
 
