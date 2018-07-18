@@ -1,6 +1,7 @@
 package server
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 	"strings"
@@ -73,12 +74,13 @@ func AccessLogger(handler http.Handler, e bool) http.HandlerFunc {
 	}
 }
 
-// WriteHeader overrides the default WriteHeader so that you can log HTTP statues.
+// WriteHeader overrides the default WriteHeader function so that you can log HTTP statues.
 func (w *LogRequest) WriteHeader(status int) {
 	w.Status = status
 	w.ResponseWriter.WriteHeader(status)
 }
 
+// Write overrides the default Write function so that AccessLogger can work correctly.
 func (w *LogRequest) Write(b []byte) (int, error) {
 	if w.Status == 0 {
 		w.Status = 200
@@ -92,6 +94,29 @@ func (w *LogRequest) Write(b []byte) (int, error) {
 func SimpleMiddleware(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Info("This is a simple middleware.")
+		h.ServeHTTP(w, r)
+	})
+}
+
+// Recovery function handles the logging of panics if the web server encounters a error.
+// Once the error is logged, the server will respond with a 500 error code to the client.
+func Recovery(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		var err error
+		defer func() {
+			r := recover()
+			if r != nil {
+				switch t := r.(type) {
+				case string:
+					err = errors.New(t)
+				case error:
+					err = t
+				default:
+					err = errors.New("encountered a unknown error")
+				}
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+			}
+		}()
 		h.ServeHTTP(w, r)
 	})
 }

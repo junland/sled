@@ -13,7 +13,7 @@ func RegisterRoutes() *httprouter.Router {
 	// Set the router.
 	router := httprouter.New()
 
-	chain := alice.New(SimpleMiddleware)
+	chain := alice.New(SimpleMiddleware, Recovery)
 
 	// Set the routes for the application.
 	router.Handler("GET", "/", chain.ThenFunc(RootHandle))
