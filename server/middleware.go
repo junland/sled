@@ -80,7 +80,7 @@ func (w *LogRequest) WriteHeader(status int) {
 	w.ResponseWriter.WriteHeader(status)
 }
 
-// Write overrides the default Write function so that AccessLogger can work correctly.
+// Write overrides the default Write function for AccessLogger.
 func (w *LogRequest) Write(b []byte) (int, error) {
 	if w.Status == 0 {
 		w.Status = 200

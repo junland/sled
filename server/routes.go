@@ -13,6 +13,10 @@ func RegisterRoutes() *httprouter.Router {
 	// Set the router.
 	router := httprouter.New()
 
+	router.HandleMethodNotAllowed = true
+	router.HandleOPTIONS = true
+	router.RedirectTrailingSlash = true
+
 	chain := alice.New(SimpleMiddleware, Recovery)
 
 	// Set the routes for the application.
