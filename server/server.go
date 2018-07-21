@@ -66,7 +66,7 @@ func Start(c Config) error {
 
 	log.Info("Serving on port " + c.Port + ", press CTRL + C to shutdown.")
 
-	p := NewPID(c.PID)
+	p := CreatePID(c.PID)
 
 	signal.Notify(done, os.Interrupt)
 
