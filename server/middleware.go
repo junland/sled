@@ -26,7 +26,8 @@ type LogRequest struct {
 	RequestHeader                                   http.Header
 }
 
-// AccessLogger configures a global HTTP access log.
+// AccessLogger configures a HTTP access log for a web server.
+// Using this middleware uses the Apache common logger as the default log entry.
 func AccessLogger(handler http.Handler, e bool) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		startTime := time.Now()
@@ -55,6 +56,10 @@ func AccessLogger(handler http.Handler, e bool) http.HandlerFunc {
 
 		duration := time.Now().Sub(startTime)
 
+		if sw.Status == 0 {
+			sw.Status = 200
+		}
+
 		record := &LogRequest{
 			Time:          startTime,
 			RemoteIP:      clientIP,
@@ -76,11 +81,14 @@ func AccessLogger(handler http.Handler, e bool) http.HandlerFunc {
 
 // WriteHeader overrides the default WriteHeader function so that you can log HTTP statues.
 func (w *LogRequest) WriteHeader(status int) {
+	if w.Status == 0 {
+		w.Status = 200
+	}
 	w.Status = status
 	w.ResponseWriter.WriteHeader(status)
 }
 
-// Write overrides the default Write function for AccessLogger.
+// Write writes a header in wireformat, this function is overridden so that AccessLogger can log the HTTP status.
 func (w *LogRequest) Write(b []byte) (int, error) {
 	if w.Status == 0 {
 		w.Status = 200
@@ -90,7 +98,7 @@ func (w *LogRequest) Write(b []byte) (int, error) {
 	return n, err
 }
 
-// SimpleMiddleware is just a example logging middleware.
+// SimpleMiddleware is just an example logging middleware.
 func SimpleMiddleware(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Info("This is a simple middleware.")
