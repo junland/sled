@@ -1,0 +1,64 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Sled
+  license:
+    name: MIT
+servers:
+ - url: http://localhost:8080/
+ - url: https://localhost:8080/
+
+tags:
+  - name: default
+    description: default resources tag
+
+paths:
+  /:
+   get:
+     summary: Declare that you are at the root.
+     operationId: helloRootHandle
+     tags:
+      - default
+     responses:
+      '202':
+        description: A greeting.
+        headers:
+          text/plain:
+            description: A plain text response.
+            schema:
+              type: string
+  /hello:
+   get:
+     summary: Get a plurl greeting.
+     operationId: helloGlobalHandle
+     tags:
+      - default
+     responses:
+      '200':
+        description: A greeting.
+        headers:
+          text/plain:
+            description: A plain text response.
+            schema:
+              type: string
+  /hello/{name}:
+   get:
+     summary: Get a personal greeting.
+     operationId: helloNameHandle
+     tags:
+      - default
+     parameters:
+      - name: name
+        in: path
+        required: true
+        description: A name to echo back
+        schema:
+          type: string
+     responses:
+      '201':
+        description: Greets you with your name
+        headers:
+          text/plain:
+            description: A plain text response
+            schema:
+              type: string
