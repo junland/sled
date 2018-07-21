@@ -7,9 +7,9 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// RootHandle is a handle.
-func RootHandle(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(201)
+// helloRootHandle is a handle.
+func helloRootHandle(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(202)
 	w.Write([]byte("I am root."))
 }
 
@@ -23,6 +23,6 @@ func helloGlobalHandle(w http.ResponseWriter, r *http.Request) {
 func helloNameHandle(w http.ResponseWriter, r *http.Request) {
 	ps := httprouter.ParamsFromContext(r.Context())
 	name := ps.ByName("name")
-	w.WriteHeader(203)
+	w.WriteHeader(201)
 	fmt.Fprintf(w, "Hello, %s\n", name)
 }

@@ -8,6 +8,36 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+func TestHelloRootHandle(t *testing.T) {
+
+	// Setup handler
+	handler := http.HandlerFunc(helloRootHandle)
+
+	// Set up the request.
+	req, err := http.NewRequest("GET", "/", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Set up the testing recorder.
+	rr := httptest.NewRecorder()
+
+	// Set up the testing recorder.
+	handler.ServeHTTP(rr, req)
+
+	// Check if status is correct.
+	if status := rr.Code; status != http.StatusAccepted {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusAccepted)
+	}
+
+	// Check if the response was OK.
+	expected := "I am root."
+	if rr.Body.String() != expected {
+		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
+	}
+}
+
 func TestHelloGlobalHandle(t *testing.T) {
 
 	// Setup handler
@@ -32,7 +62,7 @@ func TestHelloGlobalHandle(t *testing.T) {
 	}
 
 	// Check if the response was OK.
-	expected := "Hello Everyone!\n"
+	expected := "Hello everyone!"
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
 	}
@@ -57,9 +87,9 @@ func TestHelloNameHandle(t *testing.T) {
 	router.ServeHTTP(rr, req)
 
 	// Check if status is correct.
-	if status := rr.Code; status != http.StatusOK {
+	if status := rr.Code; status != http.StatusCreated {
 		t.Errorf("handler returned wrong status code: got %v want %v",
-			status, http.StatusOK)
+			status, http.StatusCreated)
 	}
 
 	// Check if the response was OK.
