@@ -2,6 +2,8 @@
 
 A simple boiler-plate for web apps.
 
+**Notice: If your viewing this repo from the Github mirror, you can still contribute to this project. Please feel free to submit issues or pull requests.**
+
 ## Features
 
 * Simple layout. No frameworks. No abstraction.
@@ -11,6 +13,8 @@ A simple boiler-plate for web apps.
 * Tries to adhere to the 12 factor application paradigm.
 
 * TLS Enabled. (Make sure to generate your key and cert.)
+
+* Documentation template (With a openAPI template for documenting your API)
 
 ## Getting started
 
@@ -68,6 +72,6 @@ _Please let me know through the issues tracker if you have any questions._
 
 ## TODO / Notes
 
-* None here for now.
+* Check issues list for more information.
 
 [docs]: docs
