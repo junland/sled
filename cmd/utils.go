@@ -7,8 +7,8 @@ import (
 // GetEnvString defines a environment variable with a specified name, fallback value.
 // The return is a string value.
 func GetEnvString(key, fallback string) string {
-	if value, ok := os.LookupEnv(key); ok {
-		return value
+	if s := os.Getenv(key); s != "" {
+		return s
 	}
 	return fallback
 }
