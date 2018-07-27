@@ -17,7 +17,7 @@ func RegisterRoutes() *httprouter.Router {
 	router.HandleOPTIONS = true
 	router.RedirectTrailingSlash = true
 
-	chain := alice.New(SimpleMiddleware, Recovery)
+	chain := alice.New(SimpleMiddleware, CORS, Recovery)
 
 	// Set the routes for the application.
 	router.Handler("GET", "/", chain.ThenFunc(helloRootHandle))

@@ -44,3 +44,37 @@ func TestRecovery(t *testing.T) {
 		t.Errorf("handler returned unexpected body: got %v want %v", rr.Code, expected)
 	}
 }
+
+func TestCORS(t *testing.T) {
+	req, err := http.NewRequest("GET", "/", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	req.Header.Set("Origin", req.URL.String())
+
+	handler := http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+		w.WriteHeader(200)
+	})
+
+	rr := httptest.NewRecorder()
+
+	testHandler := CORS(handler)
+
+	testHandler.ServeHTTP(rr, req)
+
+	expected := "*"
+	if rr.Header().Get("Access-Control-Allow-Origin") != expected {
+		t.Errorf("handler returned unexpected headers: got %v want %v", rr.Header().Get("Access-Control-Allow-Origin"), expected)
+	}
+
+	expected = "POST, GET, OPTIONS, PUT, DELETE"
+	if rr.Header().Get("Access-Control-Allow-Methods") != expected {
+		t.Errorf("handler returned unexpected headers: got %v want %v", rr.Header().Get("Access-Control-Allow-Methods"), expected)
+	}
+
+	expected = "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
+	if rr.Header().Get("Access-Control-Allow-Headers") != expected {
+		t.Errorf("handler returned unexpected headers: got %v want %v", rr.Header().Get("Access-Control-Allow-Headers"), expected)
+	}
+}
