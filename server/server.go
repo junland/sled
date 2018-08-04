@@ -68,7 +68,7 @@ func Start(c Config) error {
 
 	p := CreatePID(c.PID)
 
-	signal.Notify(done, os.Interrupt)
+	signal.Notify(stop, os.Interrupt)
 
 	log.Warn("After notify...")
 
