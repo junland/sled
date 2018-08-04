@@ -22,7 +22,7 @@ type Config struct {
 	Key    string
 }
 
-var done = make(chan os.Signal)
+var stop = make(chan os.Signal)
 
 // Start sets up and starts the main server application
 func Start(c Config) error {
@@ -72,30 +72,19 @@ func Start(c Config) error {
 
 	log.Warn("After notify...")
 
-	<-done // wait for SIGINT
+	<-stop // wait for SIGINT
 
 	log.Warn("Shutting down server...")
 
 	p.RemovePID()
 
-	log.Debug("Shutting down server...gracefully")
-
-	ctx, cancel := context.WithTimeout(context.Background(), 45*time.Second) // shut down gracefully, but wait no longer than 45 seconds before halting
-
-	log.Debug("Shutting down server...gracefully...even more...")
+	ctx, cancel := context.WithTimeout(context.Background(), 45*time.Second) // shut down gracefully, but wait no longer than 45 seconds before halting.
 
 	defer cancel()
 
-	log.Debug("Shutting down server...gracefully...even more...For sure...")
-
-	srv.Shutdown(ctx)
-
-	log.Debug("JK...this is actually the end of this function..")
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatal(err)
+	}
 
 	return nil
 }
-
-//func Stop() {
-//	log.Warn("Stopping server")
-//  done <- os.Interrupt
-//}

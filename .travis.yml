@@ -19,6 +19,5 @@ before_install:
   - sudo apt-get install -qqy upx golang-go
 
 script:
-  - make test
   - go get -t ./...
   - make travis-sizes

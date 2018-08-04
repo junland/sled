@@ -6,7 +6,7 @@ A simple boiler-plate for web apps.
 
 ## Features
 
-* Simple layout. No frameworks. No abstraction.
+* Simple layout. No frameworks. Little abstraction.
 
 * Modular (Easy to swap out logger, router, and middleware.)
 
@@ -14,7 +14,7 @@ A simple boiler-plate for web apps.
 
 * TLS Enabled. (Make sure to generate your key and cert.)
 
-* Documentation template (With a openAPI template for documenting your API)
+* Documentation template with openAPI documentation.
 
 ## Getting started
 
@@ -34,9 +34,11 @@ _Binary only builds on non-Windows systems, it's best if you use `MacOS` or `Lin
 
 4. Test it!
 
-    `http://localhost:8080/hello` (Acknowledge the security warning)
+    `http://localhost:8080/`
 
-    `http://localhost:8080/hello/Bob` (Acknowledge the security warning)
+    `http://localhost:8080/hello`
+
+    `http://localhost:8080/hello/Bob`
 
 5. Hack it! Use it! Profit!
 
@@ -50,7 +52,7 @@ If you would like to know more about this software, you can visit the repository
 
 `github.com/sirupsen/logrus` -  Structured, pluggable logging for Go.
 
-`github.com/spf13/pflag` - Drop in replacement for the `flag` package. 
+`github.com/spf13/pflag` - Drop in replacement for the `flag` package.
 
 `github.com/julienschmidt/httprouter` - A high performance HTTP request router that scales well.
 
