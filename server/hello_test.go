@@ -9,7 +9,6 @@ import (
 )
 
 func TestHelloRootHandle(t *testing.T) {
-
 	// Setup handler
 	handler := http.HandlerFunc(helloRootHandle)
 
@@ -39,7 +38,6 @@ func TestHelloRootHandle(t *testing.T) {
 }
 
 func TestHelloGlobalHandle(t *testing.T) {
-
 	// Setup handler
 	handler := http.HandlerFunc(helloGlobalHandle)
 
@@ -69,7 +67,6 @@ func TestHelloGlobalHandle(t *testing.T) {
 }
 
 func TestHelloNameHandle(t *testing.T) {
-
 	// Set up the router.
 	router := httprouter.New()
 	router.Handler("GET", "/hello/:name", http.HandlerFunc(helloNameHandle))

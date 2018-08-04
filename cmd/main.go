@@ -29,7 +29,7 @@ var (
 	enableTLS, enableAccess, version, help           bool
 )
 
-// Configuration flag and environment variables.
+// init defines configuration flags and environment variables.
 func init() {
 	flags := flag.CommandLine
 	flags.StringVar(&confLogLvl, "log-level", GetEnvString("SLED_LOG_LEVEL", defLvl), "Specify log level for output.")
@@ -64,7 +64,7 @@ func PrintVersion() {
 	fmt.Printf("License: MIT\n")
 }
 
-// Run starts the command line interface
+// Run is the entry point for starting the command line interface.
 func Run() {
 	config := server.Config{
 		LogLvl: confLogLvl,
