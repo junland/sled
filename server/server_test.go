@@ -22,5 +22,5 @@ func TestServerShutdown(t *testing.T) {
 
 	time.Sleep(2 * time.Second)
 
-	done <- os.Interrupt
+	stop <- os.Interrupt
 }
