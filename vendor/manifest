@@ -5,7 +5,7 @@
 			"importpath": "github.com/julienschmidt/httprouter",
 			"repository": "https://github.com/julienschmidt/httprouter",
 			"vcs": "git",
-			"revision": "adbc77eec0d91467376ca515bc3a14b8434d0f18",
+			"revision": "348b672cd90d8190f8240323e372ecd1e66b59dc",
 			"branch": "master",
 			"notests": true
 		},
@@ -21,7 +21,7 @@
 			"importpath": "github.com/sirupsen/logrus",
 			"repository": "https://github.com/sirupsen/logrus",
 			"vcs": "git",
-			"revision": "e54a77765aca7bbdd8e56c1c54f60579968b2dc9",
+			"revision": "d329d24db4313262a3b0a24d8aeb1dc4bd294fb0",
 			"branch": "master",
 			"notests": true
 		},
@@ -29,7 +29,7 @@
 			"importpath": "github.com/spf13/pflag",
 			"repository": "https://github.com/spf13/pflag",
 			"vcs": "git",
-			"revision": "3ebe029320b2676d667ae88da602a5f854788a8a",
+			"revision": "9a97c102cda95a86cec2345a6f09f55a939babf5",
 			"branch": "master",
 			"notests": true
 		},
@@ -37,7 +37,7 @@
 			"importpath": "golang.org/x/crypto/ssh/terminal",
 			"repository": "https://go.googlesource.com/crypto",
 			"vcs": "git",
-			"revision": "a49355c7e3f8fe157a85be2f77e6e269a0f89602",
+			"revision": "de0752318171da717af4ce24d0a2e8626afaeb11",
 			"branch": "master",
 			"path": "/ssh/terminal",
 			"notests": true
@@ -46,7 +46,7 @@
 			"importpath": "golang.org/x/sys/unix",
 			"repository": "https://go.googlesource.com/sys",
 			"vcs": "git",
-			"revision": "1b2967e3c290b7c545b3db0deeda16e9be4f98a2",
+			"revision": "98c5dad5d1a0e8a73845ecc8897d0bd56586511d",
 			"branch": "master",
 			"path": "/unix",
 			"notests": true
@@ -55,7 +55,7 @@
 			"importpath": "golang.org/x/sys/windows",
 			"repository": "https://go.googlesource.com/sys",
 			"vcs": "git",
-			"revision": "1b2967e3c290b7c545b3db0deeda16e9be4f98a2",
+			"revision": "98c5dad5d1a0e8a73845ecc8897d0bd56586511d",
 			"branch": "master",
 			"path": "windows",
 			"notests": true
