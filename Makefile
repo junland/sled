@@ -36,6 +36,11 @@ binary: clean
 	@echo "Building binary for commit $(GIT_COMMIT)"
 	go build -ldflags="-X gitlab.com/junland/sled/cmd.BinVersion=$(VERSION) -X gitlab.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
 
+.PHONY: mirror
+mirror:
+	@echo "Mirroring repo..."
+	git push --mirror https://github.com/junland/sled.git
+
 .PHONY: binary-race
 binary-race: clean
 	@echo "Building race binary for commit $(GIT_COMMIT)"
