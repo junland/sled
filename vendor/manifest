@@ -21,7 +21,7 @@
 			"importpath": "github.com/sirupsen/logrus",
 			"repository": "https://github.com/sirupsen/logrus",
 			"vcs": "git",
-			"revision": "d329d24db4313262a3b0a24d8aeb1dc4bd294fb0",
+			"revision": "f3df9aeffda7c12bd9f5a03f9251d75d35993165",
 			"branch": "master",
 			"notests": true
 		},
@@ -29,7 +29,7 @@
 			"importpath": "github.com/spf13/pflag",
 			"repository": "https://github.com/spf13/pflag",
 			"vcs": "git",
-			"revision": "9a97c102cda95a86cec2345a6f09f55a939babf5",
+			"revision": "298182f68c66c05229eb03ac171abe6e309ee79a",
 			"branch": "master",
 			"notests": true
 		},
@@ -37,7 +37,7 @@
 			"importpath": "golang.org/x/crypto/ssh/terminal",
 			"repository": "https://go.googlesource.com/crypto",
 			"vcs": "git",
-			"revision": "de0752318171da717af4ce24d0a2e8626afaeb11",
+			"revision": "0e37d006457bf46f9e6692014ba72ef82c33022c",
 			"branch": "master",
 			"path": "/ssh/terminal",
 			"notests": true
@@ -46,7 +46,7 @@
 			"importpath": "golang.org/x/sys/unix",
 			"repository": "https://go.googlesource.com/sys",
 			"vcs": "git",
-			"revision": "98c5dad5d1a0e8a73845ecc8897d0bd56586511d",
+			"revision": "d0be0721c37eeb5299f245a996a483160fc36940",
 			"branch": "master",
 			"path": "/unix",
 			"notests": true
@@ -55,7 +55,7 @@
 			"importpath": "golang.org/x/sys/windows",
 			"repository": "https://go.googlesource.com/sys",
 			"vcs": "git",
-			"revision": "98c5dad5d1a0e8a73845ecc8897d0bd56586511d",
+			"revision": "d0be0721c37eeb5299f245a996a483160fc36940",
 			"branch": "master",
 			"path": "windows",
 			"notests": true
