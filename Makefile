@@ -5,6 +5,8 @@ GIT_COMMIT:=$(shell git rev-parse --verify HEAD --short=7)
 GO_VERSION:=$(shell go version | grep -o "go1\.[0-9|\.]*")
 VERSION?=0.0.0
 BIN_NAME=sled
+APP_NAME?=sled
+APP_NAME_UPPER=`echo $(APP_NAME) | tr '[:lower:]' '[:upper:]'`
 
 .PHONY: list
 list:
@@ -66,6 +68,18 @@ travis-sizes:
 	@echo "Reported binary sizes for Go version $$(echo -n $$(go version) | grep -o '1\.[0-9|\.]*'): "
 	@cat ./size-report.txt
 	@rm -f ./*.txt
+
+repurpose: check_cont
+	ifeq ($(APP_NAME),"sled")
+		echo "APP_NAME hasn't been redifined, exiting..."
+		exit 1
+	endif
+	@echo -n "Are you sure you want to repurpose this boilerplate? [y/N] " && read ans && [ $${ans:-N} == y ]
+	sed -i -e 's/$(APP_NAME)/sled/g' sled.go
+	mv ./sled.go ./$(APP_NAME).go
+	sed -i -e 's/$(APP_NAME)/sled/g' ./cmd/*.go
+	sed -i -e 's/$(APP_NAME_UPPER)/SLED/g' ./cmd/*.go
+	sed -i -e 's/$(APP_NAME)/sled/g' ./server/*.go
 
 .PHONY: amd64-binary
 amd64-binary:

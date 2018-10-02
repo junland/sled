@@ -14,8 +14,6 @@ A simple boiler-plate for web apps.
 
 * TLS Enabled. (Make sure to generate your key and cert.)
 
-* Documentation template with openAPI documentation.
-
 ## Getting started
 
 _Binary only builds on non-Windows systems, it's best if you use `MacOS` or `Linux` for development._
@@ -41,10 +39,6 @@ _Binary only builds on non-Windows systems, it's best if you use `MacOS` or `Lin
     `http://localhost:8080/hello/Bob`
 
 5. Hack it! Use it! Profit!
-
-## Documentation
-
-If you would like to know more about this software, you can visit the repository documentation which is located [here][docs].
 
 ## Built With
 
@@ -75,5 +69,3 @@ _Please let me know through the issues tracker if you have any questions._
 ## TODO / Notes
 
 * Check issues list for more information.
-
-[docs]: docs
