@@ -1,6 +1,6 @@
 # Env Options
 sudo: required
-dist: trusty
+dist: xenial
 
 # Language Options
 language: go
@@ -8,16 +8,22 @@ language: go
 go:
   - 1.9.7
   - 1.10.8
-  - 1.11.10
-  - 1.12.5
+  - 1.11.12
+  - 1.12.7
+  - 1.12.9
+  - 1.13beta1
   - master
   - tip
 
 before_install:
+  - sudo echo "deb http://archive.ubuntu.com/ubuntu/ cosmic universe" >> /etc/apt/sources.list
+  - sudo echo "deb http://archive.ubuntu.com/ubuntu/ cosmic main restricted" >> /etc/apt/sources.list
   - sudo apt-get update -qqy
-  - sudo apt-get install -qqy upx golang-go
+  - sudo apt-get install upx golang-go gccgo -qqy 
+  - sudo apt-get autoremove -qqy
 
 before_script:
+  - gccgo -v
   - go get -t ./...
 
 script:
