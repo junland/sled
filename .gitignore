@@ -24,3 +24,6 @@
 # Exclude PID files
 *.pid
 
+# Exclude vendor dir
+vendor/
+
