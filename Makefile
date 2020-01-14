@@ -36,7 +36,7 @@ test:
 .PHONY: clean
 binary: clean
 	@echo "Building binary for commit $(GIT_COMMIT)"
-	go build -ldflags="-X gitlab.com/junland/sled/cmd.BinVersion=$(VERSION) -X gitlab.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
+	go build -ldflags="-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
 
 .PHONY: mirror
 mirror:
@@ -46,7 +46,7 @@ mirror:
 .PHONY: binary-race
 binary-race: clean
 	@echo "Building race binary for commit $(GIT_COMMIT)"
-	go build -race -ldflags="-X gitlab.com/junland/sled/cmd.BinVersion=$(VERSION) -X gitlab.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
+	go build -race -ldflags="-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
 
 .PHONY: tls-certs
 tls-certs:
@@ -84,14 +84,14 @@ repurpose: check_cont
 .PHONY: amd64-binary
 amd64-binary:
 	rm -f $(BIN_NAME)
-	GOARCH=amd64 go build -ldflags "-X gitlab.com/junland/sled/cmd.BinVersion=$(VERSION) -X gitlab.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
+	GOARCH=amd64 go build -ldflags "-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
 
 .PHONY: aarch64-binary
 aarch64-binary:
 	rm -f $(BIN_NAME)
-	GOARCH=arm64 go build -ldflags "-X gitlab.com/junland/sled/cmd.BinVersion=$(VERSION) -X gitlab.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
+	GOARCH=arm64 go build -ldflags "-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
 
 .PHONY: armhf-binary
 armhf-binary:
 	rm -f $(BIN_NAME)
-	GOARCH=arm GOARM=7 go build -ldflags "-X gitlab.com/junland/sled/cmd.BinVersion=$(VERSION) -X gitlab.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
+	GOARCH=arm GOARM=7 go build -ldflags "-X github.com/junland/sled/cmd.BinVersion=$(VERSION) -X github.com/junland/sled/cmd.GoVersion=$(GO_VERSION)" -o $(BIN_NAME)
