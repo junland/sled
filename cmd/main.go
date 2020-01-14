@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	flag "github.com/spf13/pflag"
-	"gitlab.com/junland/sled/server"
+	"github.com/junland/sled/server"
 )
 
 // BinVersion describes built binary version.
