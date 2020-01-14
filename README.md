@@ -1,8 +1,6 @@
-# Sled [![Build Status](https://travis-ci.org/junland/sled.svg?branch=master)](https://travis-ci.org/junland/sled) [![GoDoc](https://godoc.org/gitlab.com/junland/sled?status.svg)](http://godoc.org/gitlab.com/junland/sled)
+# Sled [![Build Status](https://travis-ci.org/junland/sled.svg?branch=master)](https://travis-ci.org/junland/sled) [![GoDoc](https://godoc.org/github.com/junland/sled?status.svg)](http://godoc.org/github.com/junland/sled)
 
 A simple boiler-plate for web apps.
-
-**Notice: If your viewing this repo from the Github mirror, you can still contribute to this project. Please feel free to submit issues or pull requests.**
 
 ## Features
 
