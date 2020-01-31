@@ -27,11 +27,12 @@ before_install:
 before_script:
   - gccgo -v
   - go get -t ./...
-  - go get github.com/jondot/goweight
+  - cd /usr/local/bin && sudo wget https://github.com/jondot/goweight/releases/download/v1.0.5/goweight_1.0.5_Linux_x86_64.tar.gz
+  - cd /usr/local/bin && sudo tar -xf goweight_1.0.5_Linux_x86_64.tar.gz && sudo chmod 777 goweight
 
 jobs:
   include:
     - stage: test-sizes
-      script: make travis-sizes
+      script: make travis-sizes && make clean
     - stage: test-weight
       script: goweight
