@@ -27,6 +27,11 @@ before_install:
 before_script:
   - gccgo -v
   - go get -t ./...
+  - go get github.com/jondot/goweight
 
-script:
-  - make travis-sizes
+jobs:
+  include:
+    - stage: test-sizes
+      script: make travis-sizes
+    - stage: test-weight
+      script: goweight
