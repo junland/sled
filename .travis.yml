@@ -21,7 +21,7 @@ go:
 before_install:
   - sudo echo "deb http://archive.ubuntu.com/ubuntu/ cosmic universe" >> /etc/apt/sources.list
   - sudo echo "deb http://archive.ubuntu.com/ubuntu/ cosmic main restricted" >> /etc/apt/sources.list
-  - sudo apt-get update -qqy
+  - sudo apt-get update -qqy || true
   - sudo apt-get install upx golang-go gccgo -qqy 
   - sudo apt-get autoremove -qqy
 
