@@ -29,7 +29,5 @@ before_script:
   - gccgo -v
   - go get -t ./...
 
-jobs:
-  include:
-    - stage: test-sizes
-      script: make travis-sizes && make clean
+script:
+  - make travis-sizes
