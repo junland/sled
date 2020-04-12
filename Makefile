@@ -3,10 +3,11 @@ GOPATH := $(shell go env GOPATH)
 PKG_NAME := "sled"
 GIT_COMMIT:=$(shell git rev-parse --verify HEAD --short=7)
 GO_VERSION:=$(shell go version | grep -o "go1\.[0-9|\.]*")
-VERSION?=0.0.0
-BIN_NAME=sled
-APP_NAME?=sled
-APP_NAME_UPPER=`echo $(APP_NAME) | tr '[:lower:]' '[:upper:]'`
+VERSION ?= 0.0.0
+BIN_NAME := sled
+APP_NAME ?= sled
+CGO_ENABLED := 0 
+APP_NAME_UPPER := `echo $(APP_NAME) | tr '[:lower:]' '[:upper:]'`
 
 .PHONY: list
 list:
