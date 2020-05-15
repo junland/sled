@@ -1,9 +1,21 @@
 kind: pipeline
 type: docker
-name: default
+name: backend
+
 steps:
-  - name: dronetest
-    image: node
+  - name: hello
+    image: alpine
     commands:
-      npm install
-      npm test
+      - echo Hello World!
+
+---
+kind: pipeline
+type: docker
+name: frontend
+
+steps:
+  - name: hello
+    image: alpine
+    commands:
+      - echo Hello World! Frontend
+
