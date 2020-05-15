@@ -12,3 +12,4 @@ steps:
 trigger:
   branch:
   - master
+  - asdf
