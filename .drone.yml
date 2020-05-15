@@ -1,29 +1,14 @@
 kind: pipeline
 type: docker
-name: backend
+name: default
 
 steps:
-  - name: hello
-    image: alpine
-    commands:
-      - echo Hello World!
+- name: build
+  image: golang
+  commands:
+  - go build
+  - go test
 
 trigger:
   branch:
   - master
-
----
-kind: pipeline
-type: docker
-name: frontend
-
-trigger:
-  branch:
-  - master
-
-steps:
-  - name: hello
-    image: alpine
-    commands:
-      - echo Hello World! Frontend
-
