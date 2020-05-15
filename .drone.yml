@@ -9,9 +9,9 @@ steps:
     commands:
       - echo Hello World!
   - name: hello
-      image: alpine
-      commands:
-        - echo Hello World! 2
+    image: alpine
+    commands:
+      - echo Hello World! 2
 
 ---
 kind: pipeline
