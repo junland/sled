@@ -8,10 +8,18 @@ steps:
     commands:
       - echo Hello World!
 
+trigger:
+  branch:
+  - master
+
 ---
 kind: pipeline
 type: docker
 name: frontend
+
+trigger:
+  branch:
+  - master
 
 steps:
   - name: hello
