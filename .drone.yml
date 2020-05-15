@@ -8,7 +8,7 @@ steps:
     image: alpine
     commands:
       - echo Hello World!
-  - name: hello
+  - name: hello2
     image: alpine
     commands:
       - echo Hello World! 2
